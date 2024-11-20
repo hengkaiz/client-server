@@ -19,12 +19,27 @@ function getId() {
   return i++
 }
 
+router.post(
+  '/http/products',
+  async (req: PostProductsRequest, res: Response<Product>) => {
+    const { name, price, description, currency } = req.body
+    const product = {
+      id: getId(),
+      name,
+      price,
+      description,
+      currency,
+    }
+
+    PRODUCTS.push(product)
+    return res.send(product)
+  }
+)
+
 router.get(
   '/http/products',
-  // Modify the Response generic to that of the return type passed to res.send()
-  async (req: GetProductsRequest, res: Response<null>) => {
-    // Modify the code here
-    return res.send({})
+  async (req: GetProductsRequest, res: Response<Product[]>) => {
+    res.send(PRODUCTS)
   }
 )
 
@@ -32,20 +47,17 @@ router.get(
   '/http/products/:id',
   async (
     req: GetProductByIdRequest,
-    // Modify the Response generic to that of the return type passed to res.send()
-    res: Response<null>
+    res: Response<Product | { product: null }>
   ) => {
-    // Modify the code here
-    return res.send({})
-  }
-)
+    const product = PRODUCTS.find(
+      (product) => parseInt(req.params.id) === product.id
+    )
 
-router.post(
-  '/http/products',
-  // Modify the Response generic to that of the return type passed to res.send()
-  async (req: PostProductsRequest, res: Response<null>) => {
-    // Modify the code here
-    return res.send({})
+    if (!product) {
+      throw Boom.notFound('Invalid Product Id')
+    }
+
+    res.send(product ? product : { product: null })
   }
 )
 
@@ -53,11 +65,19 @@ router.patch(
   '/http/products/:id',
   async (
     req: PatchProductByIdRequest,
-    // Modify the Response generic to that of the return type passed to res.send()
-    res: Response<null>
+    res: Response<Product | { product: null }>
   ) => {
-    // Modify the code here
-    return res.send({})
+    const product = PRODUCTS.find(
+      (product) => parseInt(req.params.id) === product.id
+    )
+
+    if (!product) {
+      throw Boom.notFound('Invalid Product Id')
+    }
+
+    Object.assign(product, req.body)
+
+    return res.send(product)
   }
 )
 
@@ -65,11 +85,19 @@ router.delete(
   '/http/products/:id',
   async (
     req: DeleteProductByIdRequest,
-    // Modify the Response generic to that of the return type passed to res.send()
-    res: Response<null>
+    res: Response<{ id: number } | { product: null }>
   ) => {
-    // Modify the code here
-    return res.send({})
+    const productIndex = PRODUCTS.findIndex(
+      (product) => product.id === parseInt(req.params.id)
+    )
+
+    if (productIndex < 0) {
+      throw Boom.notFound('Invalid Product Id')
+    }
+
+    PRODUCTS.splice(productIndex, 1)
+
+    return res.send({ id: parseInt(req.params.id) })
   }
 )
 

@@ -9,7 +9,6 @@ import {
 
 const router: Router = Router()
 
-// Do not modify this
 export const PRODUCTS: Product[] = [
   {
     id: 1,
@@ -35,24 +34,22 @@ export const PRODUCTS: Product[] = [
 router.get(
   '/url-paths/products',
   (req: GetAllProductsRequest, res: Response<Product[]>) => {
-    // modify this to return all products in the PRODUCTS array
-    return res.send([])
+    return res.send(PRODUCTS)
   }
 )
 
 router.get(
   '/url-paths/products/with-discount',
   (req: GetAllProductsWithDiscountRequest, res: Response<Product[]>) => {
-    // modify this to return only products with a discount in the PRODUCTS array
-    return res.send([])
+    return res.send(PRODUCTS.filter((product) => product.discount))
   }
 )
 
 router.get(
   '/url-paths/products/:id',
   (req: GetProductByIdRequest, res: Response<Product>) => {
-    // modify this to return the product with the specified id
-    return res.send({})
+    const numId = parseInt(req.params.id)
+    return res.send(PRODUCTS.find((product) => product.id === numId))
   }
 )
 

@@ -26,4 +26,26 @@ export default class Product extends Model<
   ProductAttributes,
   ProductCreationAttributes
 > {
+  @AllowNull(false)
+  @Column
+  name: string
+
+  @AllowNull(false)
+  @Column(DataType.TEXT)
+  description: string
+
+  @AllowNull(false)
+  @Column(DataType.DECIMAL)
+  price: number
+
+  @AllowNull(false)
+  @Column
+  currency: string
+
+  @ForeignKey(() => ProductCategory)
+  @Column
+  productCategoryId: number
+
+  @BelongsTo(() => ProductCategory)
+  productCategory: ProductCategory
 }

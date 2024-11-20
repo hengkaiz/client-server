@@ -21,10 +21,10 @@ export interface IUserRequest {
 
 // Modify the type here
 export interface RegisterUserRequest extends Request {
-  body: {}
+  body: Omit<IUser, 'id'>
 }
 
 // Modify the type here
 export interface LoginUserRequest extends Request {
-  body: {}
+  body: Omit<IUser, 'id'>
 }

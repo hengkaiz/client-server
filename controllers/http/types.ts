@@ -1,6 +1,35 @@
 import { Request } from 'express'
 
-// Do not modify this
+export interface PostProductsRequest extends Request {
+  body: {
+    name: string
+    price: number
+    description: string
+    currency: string
+  }
+}
+
+export interface GetProductsRequest extends Request {}
+
+export interface GetProductByIdRequest extends Request {
+  params: {
+    id: string
+  }
+}
+
+export interface PatchProductByIdRequest extends Request {
+  params: {
+    id: string
+  }
+  body: Partial<Product>
+}
+
+export interface DeleteProductByIdRequest extends Request {
+  params: {
+    id: string
+  }
+}
+
 export interface ProductCreationAttributes {
   name: string
   price: number
@@ -8,30 +37,6 @@ export interface ProductCreationAttributes {
   currency: string
 }
 
-// Do not modify this
 export type Product = ProductCreationAttributes & {
   id: number
-}
-
-// Modify the type here
-export interface PostProductsRequest extends Request {
-  body: {}
-}
-
-export interface GetProductsRequest extends Request {}
-
-// Modify the type here
-export interface GetProductByIdRequest extends Request {
-  params: {}
-}
-
-// Modify the type here
-export interface PatchProductByIdRequest extends Request {
-  params: {}
-  body: {}
-}
-
-// Modify the type here
-export interface DeleteProductByIdRequest extends Request {
-  params: {}
 }

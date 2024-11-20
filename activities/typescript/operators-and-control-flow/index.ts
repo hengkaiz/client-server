@@ -20,7 +20,7 @@ export interface Product {
 
 export function isProductPriceOver100(product: Product) {
   // Add missing condition here
-  if () {
+  if (product.price > 100) {
     return true
   }
 
@@ -29,7 +29,7 @@ export function isProductPriceOver100(product: Product) {
 
 export function productHasValidName(product: Product) {
   // Add missing condition here
-  if () {
+  if (product.name) {
     return true
   }
 
@@ -38,7 +38,14 @@ export function productHasValidName(product: Product) {
 
 export function getDiscountedPriceByDiscountType(product: Product) {
   // Add missing condition here
-  if () {
+  if (product.discountType) {
+    if (product.discountType === DiscountType.CHRISTMAS_SALE) {
+      return product.price * 0.9
+    } else if (product.discountType === DiscountType.MEMBER) {
+      return product.price * 0.8
+    } else if (product.discountType === DiscountType.NEW_YEAR) {
+      return product.price * 0.7
+    }
   }
 
   return product.price
@@ -47,7 +54,7 @@ export function getDiscountedPriceByDiscountType(product: Product) {
 export function getDiscountedPriceByCurrency(product: Product) {
   // Add missing condition here
 
-  if () {
+  if (product.currency === 'usd' && product.price >= 100) {
     return product.price * 0.9
   }
 

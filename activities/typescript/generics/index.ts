@@ -39,13 +39,13 @@ function modifyProductDescription<T extends Products>(
 }
 
 // Only modify the generics parameter of modifyProductDescription
-const towelWithNewDescription = modifyProductDescription<>(
+const towelWithNewDescription = modifyProductDescription<Product>(
   towel,
   'The most most absorbent bathroom towel'
 )
 
 // Only modify the generics parameter of modifyProductDescription
-const slippersWithNewDescription = modifyProductDescription<>(
+const slippersWithNewDescription = modifyProductDescription<Product>(
   slippers,
   'The most most absorbent bathroom towel'
 )
@@ -57,10 +57,10 @@ function modifyProductPrice<T extends Products>(product: T, price: number): T {
 }
 
 // Only modify the generics parameter of modifyProductPrice
-const towelWithNewPrice = modifyProductPrice<>(towel, 80)
+const towelWithNewPrice = modifyProductPrice<Product>(towel, 80)
 
 // Only modify the generics parameter of modifyProductPrice
-const slippersWithNewPrice = modifyProductPrice<>(slippers, 80)
+const slippersWithNewPrice = modifyProductPrice<Product>(slippers, 80)
 
 interface ModifiableAttributes {
   name?: string
@@ -79,10 +79,13 @@ function modifyProductAttributes<
 }
 
 // Only modify the generics parameter of modifyProductAttributes
-modifyProductAttributes<>(towel, { name: 'Softest Towel', price: 50 })
+modifyProductAttributes<Product, ModifiableAttributes>(towel, {
+  name: 'Softest Towel',
+  price: 50,
+})
 
 // Only modify the generics parameter of modifyProductAttributes
-modifyProductAttributes<>(slippers, {
+modifyProductAttributes<Product, ModifiableAttributes>(slippers, {
   name: 'Ergonomic Slippers',
   price: 80,
 })

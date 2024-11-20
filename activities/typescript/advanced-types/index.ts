@@ -12,10 +12,16 @@ const enum CurrencyCode {
 
 // Only modify this type
 interface Product {
-  name: null
+  name: string
+  price: number
+  currency: CurrencyCode
+  description: string
+  discount?: {
+    percentage: number
+    type: DiscountType
+  }
 }
 
-// Do not modify this
 export const product1: Product = {
   name: 'Bathroom Slippers',
   price: 42,
@@ -23,7 +29,6 @@ export const product1: Product = {
   description: "The most comfy slippers you'll ever wear in the bathroom",
 }
 
-// Do not modify this
 export const product2: Product = {
   name: 'Towel',
   price: 20,
@@ -41,7 +46,7 @@ interface DiscountInfo {
 }
 
 // Only change the type of discountInfo here
-export let discountInfo: undefined = null
+export let discountInfo: null | DiscountInfo = null
 
 discountInfo = {
   percentage: 0.5,
@@ -53,10 +58,10 @@ interface Category {
 }
 
 // Only change the type here
-type CategoryWithTags = null
+type CategoryWithTags = Category & { tags: string[] }
 
 // Only change the type here
-type CategoryWithRanking = null
+type CategoryWithRanking = Category & { ranking: number }
 
 // Do not modify this
 export const categoryWithTags: CategoryWithTags[] = [

@@ -4,9 +4,11 @@ const router: Router = Router()
 
 router.get(
   '/http-headers',
-  // Modify the Response generic to that of the return type passed to res.send()
-  async (req: Request, res: Response<null>) => {
-    return res.send({})
+  async (req: Request, res: Response<{ 'secret-header'?: string }>) => {
+    const headerValue = req.header('secret-header')
+    return res.send({
+      'secret-header': headerValue,
+    })
   }
 )
 

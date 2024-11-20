@@ -1,3 +1,4 @@
+import * as Boom from '@hapi/boom'
 import { Response, Router } from 'express'
 
 import Product from '../../models/product'
@@ -13,8 +14,25 @@ interface GetProductsByCategoryRequest {
 
 router.get(
   '/product-categories/:productCategory/products',
-  // Modify the Response generic to that of the return type passed to res.send()
-  async (req: GetProductsByCategoryRequest, res: Response<[]>) => {
+  async (req: GetProductsByCategoryRequest, res: Response<Product[]>) => {
+    const category = await ProductCategory.findOne({
+      where: {
+        name: req.params.productCategory,
+      },
+    })
+
+    if (!category) {
+      throw Boom.notFound(
+        `Product category ${req.params.productCategory} does not exist`
+      )
+    }
+
+    const products = await Product.findAll({
+      include: [
+        { model: ProductCategory, where: { name: req.params.productCategory } },
+      ],
+    })
+
     return res.send(products)
   }
 )

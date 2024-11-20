@@ -14,4 +14,10 @@ export default class ProductCategory extends Model<
   ProductCategoryAttributes,
   ProductCategoryCreationAttributes
 > {
+  @AllowNull(false)
+  @Column
+  name: string
+
+  @HasMany(() => Product)
+  products: Product[]
 }

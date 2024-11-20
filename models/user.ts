@@ -11,4 +11,18 @@ import {
 
 @Table({ tableName: 'user' })
 export default class UserModel extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Column(DataType.BIGINT)
+  id: number
+
+  @Unique
+  @Column(DataType.STRING)
+  username: string
+
+  @Column(DataType.STRING)
+  password: string
+
+  @Column(DataType.STRING)
+  role?: UserRole
 }

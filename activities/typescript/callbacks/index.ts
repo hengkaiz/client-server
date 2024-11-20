@@ -53,35 +53,41 @@ const products: Product[] = [
 // Do not modify the function declaration or signature
 export function getProductWithPrice30() {
   // Make use of array functions to return the correct array of products
-  return products
+  return products.find((product) => product.price === 30)
 }
 
 // Do not modify the function declaration or signature
 export function getProductsWithDiscount() {
   // Make use of array functions to return the correct array of products
-  return products
+  return products.filter((product) => product.discount)
 }
 
 // Do not modify the function declaration or signature
 export function getProductsWithPriceBelow100() {
   // Make use of array functions to return the correct array of products
-  return products
+  return products.filter((product) => product.price < 100)
 }
 
 // Do not modify the function declaration or signature
 export function getProductDescriptions() {
   // Make use of array functions to return the correct array of products
   return products
+    .filter((product) => product.description)
+    .map((product) => product.description)
 }
 
 // Do not modify the function declaration or signature
 export function getProductNames() {
   // Make use of array functions to return the correct array of products
   return products
+    .filter((product) => product.name)
+    .map((product) => product.name)
 }
 
 // Do not modify the function declaration or signature
 export function getProductIndex() {
-  // Make use of array functions to find the product's index and return it
-  return products
+  // Make use of array functions to find the product's index
+  const productIndex = products.findIndex((product) => product.discount)
+
+  return { index: productIndex }
 }

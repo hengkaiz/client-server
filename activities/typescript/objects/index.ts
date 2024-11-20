@@ -1,5 +1,8 @@
 // Only modify the type of this variable. Do not modify its value
-export const category: null = { id: 1, name: 'Electronics' }
+export const category: { id: number; name: string } = {
+  id: 1,
+  name: 'Electronics',
+}
 
 const enum DiscountType {
   ANNUAL_SALE = 'annual_sale',
@@ -15,7 +18,14 @@ const enum CurrencyCode {
 
 // Only modify the type information in this interface
 interface Product {
-  name: null
+  name: string
+  price: number
+  currency: CurrencyCode
+  description: string
+  discount: {
+    percentage: number
+    type: DiscountType
+  }
 }
 
 // Do not modify this

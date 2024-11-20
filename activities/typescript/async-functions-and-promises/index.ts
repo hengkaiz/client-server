@@ -34,6 +34,9 @@ export async function processOrder() {
   const processingPipeline: { [key: string]: boolean }[] = []
 
   // add function calls here
+  await reserveStock(processingPipeline)
+  await createTransaction(processingPipeline)
+  await sendEmail(processingPipeline)
 
   return { processingPipeline }
 }
@@ -42,6 +45,8 @@ export async function processOrderWithoutEmail() {
   const processingPipeline: { [key: string]: boolean }[] = []
 
   // add function calls here
+  await reserveStock(processingPipeline)
+  await createTransaction(processingPipeline)
 
   return { processingPipeline }
 }

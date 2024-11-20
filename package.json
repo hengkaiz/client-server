@@ -13,7 +13,8 @@
     "debug-test-server": "cross-env DATABASE_URL=postgresql://postgres:postgrespw@localhost:55003/ecommerce_test?schema=public npx prisma studio",
     "lint": "eslint activities/typescript/variable-declaration --format=json > test.json",
     "ts-node": "ts-node",
-    "build": "zx scripts/create-user-build.mjs"
+    "build": "zx scripts/create-user-build.mjs",
+    "build-answers": "zx scripts/create-answer-build.mjs"
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",

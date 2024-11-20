@@ -5,13 +5,34 @@ import { Product } from './types'
 const router: Router = Router()
 
 router.get('/json/products', (req: Request, res: Response<Product[]>) => {
-  // modify the response to return an array of products
-  return res.send([])
+  return res.send([
+    {
+      id: 1,
+      name: 'Bathroom Slippers',
+      price: 30,
+      discount: {
+        type: 'sale',
+        percentage: 0.5,
+      },
+    },
+    {
+      id: 2,
+      name: 'Bathroom Towel',
+      price: 15,
+    },
+  ])
 })
 
 router.get('/json/product', (req: Request, res: Response<Product>) => {
-  // modify the response to return a product
-  return res.send({})
+  return res.send({
+    id: 1,
+    name: 'Bathroom Slippers',
+    price: 30,
+    discount: {
+      type: 'sale',
+      percentage: 0.5,
+    },
+  })
 })
 
 export default router

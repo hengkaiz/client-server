@@ -10,6 +10,7 @@ enum CurrencyCode {
   EUR = 'EUR',
 }
 
+/** General Product Interface(s) */
 export interface Product {
   id?: number
   name: string
@@ -18,29 +19,41 @@ export interface Product {
   currency: CurrencyCode
 }
 
+/** Create Product Request Interface(s) */
 export interface RequestWithUser extends Request {
   user?: IUserRequest
 }
 
-// Modify the type here
 export interface PostProductsRequest extends RequestWithUser {
-  body: {}
+  body: ProductCreationAttributes
 }
 
-export interface GetProductsRequest extends RequestWithUser {}
+/** Get Product Request Interface(s) */
+export interface GetProductsRequest extends RequestWithUser {
+  query: {
+    page: string
+    size: string
+  }
+}
 
-// Modify the type here
+/** Get Product By Id Request Interface(s) */
 export interface GetProductByIdRequest extends RequestWithUser {
-  params: {}
+  params: {
+    id: string
+  }
 }
 
-// Modify the type here
+/** Update Product By Id Request Interface(s) */
 export interface PatchProductByIdRequest extends RequestWithUser {
-  params: {}
-  body: {}
+  params: {
+    id: string
+  }
+  body: Partial<Product>
 }
 
-// Modify the type here
+/** Delete Product By Id Request Interface(s) */
 export interface DeleteProductByIdRequest extends RequestWithUser {
-  params: {}
+  params: {
+    id: string
+  }
 }

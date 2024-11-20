@@ -52,17 +52,22 @@ interface CreateProductRequest extends Request {
  Modify `productSchema` such that requests with validation errors does
  not go through
 */
-const productSchema = Joi.object({})
+const productSchema = Joi.object({
+  name: Joi.string().required(),
+  description: Joi.string().required(),
+  price: Joi.number().required(),
+})
 
 router.post(
   '/validation/products',
   (req: CreateProductRequest, res: Response<Product | null>) => {
-    // Add validation check here
+    const { error } = productSchema.validate(req.body)
+    if (error) {
+      throw Boom.badRequest()
+    }
 
     const newProduct = { id: PRODUCTS.length, ...req.body }
-
     PRODUCTS.push(newProduct)
-
     return res.send(newProduct)
   }
 )
